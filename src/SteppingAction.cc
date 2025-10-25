@@ -15,6 +15,7 @@ namespace TASK1 {
 			G4RunManager::GetRunManager()->GetUserDetectorConstruction()
 			);
 		fDetector = detConstruction->GetDetector();
+		fPlate = detConstruction->GetPlate();
 		
 
 		if (eventAction) {
@@ -38,12 +39,17 @@ namespace TASK1 {
 			->GetVolume()->GetLogicalVolume();
 
 		// end here if the particle isn't in the detector
-		if (volume != fDetector) { return; }
 
+		if (step->IsFirstStepInVolume() && volume == fPlate) {
+			feventAction->SetLaunchPosition(step->GetPreStepPoint()->GetPosition());
+		}
+
+		if (volume != fDetector) return;
 		// If it's the first step in the volume, save the position. 
 		if (step->IsFirstStepInVolume()) {
 			feventAction->SetPosition(step->GetPreStepPoint()->GetPosition());
 		}
+
 
 		// Register all the energy to the eventAction while it's in the detector.
 		feventAction->AddEnergy(step->GetTotalEnergyDeposit());

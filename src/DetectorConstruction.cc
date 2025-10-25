@@ -127,6 +127,7 @@ namespace TASK1
 
         //setting plate as scoring volume
         fDetector = logicTube;
+        fPlate = logicPlate;
 
         return physWorld;
     }

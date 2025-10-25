@@ -22,6 +22,8 @@ namespace TASK1 {
 	
 	void EventAction::SetPosition(G4ThreeVector p) { fPosition = p; }
 
+	void EventAction::SetLaunchPosition(G4ThreeVector p) { fLaunchPosition= p; }
+
 	void EventAction::EndOfEventAction(const G4Event* anEvent) {
 		// if there was any energy deposited, tell the analysis manager.
 
@@ -34,8 +36,10 @@ namespace TASK1 {
 			G4int energyColumnId = 0;
 			G4int cosThetaColumnId = 1;
 			//G4double r = sqrt(pow(fPosition.getX(), 2) + pow(fPosition.getY(), 2) + pow(fPosition.getZ(), 2));
-			G4double r = fPosition.getR();
-			G4double y = fPosition.getY();
+			G4double r = sqrt(pow((fLaunchPosition.getX() - fPosition.getX()), 2) 
+				+ pow((fLaunchPosition.getY() - fPosition.getY()), 2)
+				+ pow((fLaunchPosition.getZ() - fPosition.getZ()), 2));
+			G4double y = fLaunchPosition.getZ() - fPosition.getZ();
 
 			analysisManager->FillNtupleDColumn(energyColumnId, fEnergy);
 			analysisManager->FillNtupleDColumn(cosThetaColumnId, y/r);

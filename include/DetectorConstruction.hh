@@ -14,9 +14,11 @@ namespace TASK1
 		G4VPhysicalVolume* Construct() override;
 
 		G4LogicalVolume* GetDetector() const { return fDetector; }
+		G4LogicalVolume* GetPlate() const { return fPlate; }
 
 	private:
 		G4LogicalVolume* fDetector = nullptr;
+		G4LogicalVolume* fPlate = nullptr;
 	};
 }
 

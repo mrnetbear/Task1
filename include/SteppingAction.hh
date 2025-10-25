@@ -18,6 +18,7 @@ namespace TASK1 {
 
 	private:
 		G4LogicalVolume* fDetector = nullptr;
+		G4LogicalVolume* fPlate = nullptr;
 
 		EventAction* feventAction = nullptr;
 
