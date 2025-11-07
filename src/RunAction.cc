@@ -22,6 +22,9 @@ namespace TASK1 {
 		// The letters D, I, S, F correspond to types
 		analysisManager->CreateNtupleDColumn("Energy"); //   id = 0
 		analysisManager->CreateNtupleDColumn("CosTheta"); //id = 1
+		analysisManager->CreateNtupleDColumn("CosTheta1"); //id = 2
+		analysisManager->CreateNtupleDColumn("ZScore"); //id = 3
+
 		analysisManager->FinishNtuple();
 
 	}

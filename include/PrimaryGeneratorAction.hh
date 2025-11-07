@@ -20,8 +20,11 @@ namespace TASK1
 		~PrimaryGeneratorAction();
 
 		virtual void GeneratePrimaries(G4Event*);
+		G4bool GetParticleSource(void) const { return fSource; };
 
 		G4ParticleGun* fParticleGun;
+		G4bool fSource = true;
+		
 	};
 }
 

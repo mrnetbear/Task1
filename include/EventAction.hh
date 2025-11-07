@@ -31,11 +31,13 @@ namespace TASK1 {
 		void AddEnergy(G4double energy);
 		void SetPosition(G4ThreeVector pos);
 		void SetLaunchPosition(G4ThreeVector pos);
+		void SetSource(G4bool src);
 
 	private:
 		G4double fEnergy;
 		G4ThreeVector fPosition;
 		G4ThreeVector fLaunchPosition;
+		G4bool fSource = 1;
 	};
 
 	

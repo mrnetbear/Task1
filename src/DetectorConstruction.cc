@@ -64,9 +64,17 @@ namespace TASK1
 
 
 		// Start with constructing the world:
-        G4double worldSize = 10 * cm;
+        G4double worldSize = 20 * cm;
         G4Material* vacuum = nist->FindOrBuildMaterial("G4_Galactic");
         //G4Material* air = nist->FindOrBuildMaterial("G4_AIR");
+        G4double maxStep  = .5*um;
+        G4double maxTrack = 10.*m;
+        G4double maxTime  = 1.*s;
+        G4double minE     = 0.001 * MeV;
+        G4double minRange = 0.1 * mm;
+
+        //,maxTrack,maxTime,minE,minRange
+        fStepLimit = new G4UserLimits(maxStep);
 
         auto solidWorld = new G4Box("World",
             worldSize / 2,
@@ -85,6 +93,7 @@ namespace TASK1
             false, 
             0);
 
+        logicWorld->SetUserLimits(fStepLimit);
         //---------------------Detector construction------------------------
 
         // golden plate
@@ -98,12 +107,16 @@ namespace TASK1
         auto logicPlate = new G4LogicalVolume(plate, nist->FindOrBuildMaterial("G4_Au"), "plate");
         new G4PVPlacement(0, posPlate, logicPlate, "plate", logicWorld, false, 0);
 
+        maxStep=10*nm; 
+        fStepLimit = new G4UserLimits(maxStep);
+        logicPlate->SetUserLimits(fStepLimit);
+
 
         G4double tubeShapeD = 10 * cm, tubeHeightZ = 5 * cm;
         auto tube = new G4Tubs("tube",
             tubeShapeD / 2.0 - 4 * mm, 
             tubeShapeD / 2.0,
-            tubeHeightZ / 2.0,
+            tubeHeightZ,
             0.0 * deg,
             360.0 * deg);
 

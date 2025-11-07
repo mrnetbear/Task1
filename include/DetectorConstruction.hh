@@ -3,6 +3,8 @@
 
 #include "G4VUserDetectorConstruction.hh"
 
+class G4UserLimits;
+
 namespace TASK1
 {
 	class DetectorConstruction : public G4VUserDetectorConstruction
@@ -19,6 +21,7 @@ namespace TASK1
 	private:
 		G4LogicalVolume* fDetector = nullptr;
 		G4LogicalVolume* fPlate = nullptr;
+		G4UserLimits* fStepLimit;
 	};
 }
 
