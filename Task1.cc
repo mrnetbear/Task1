@@ -11,7 +11,6 @@
 #include "G4StepLimiterPhysics.hh"
 
 #include "include/DetectorConstruction.hh"
-#include "include/PhysicsList.hh"
 
 #include "include/ActionInit.hh"
 //#include <G4Types.hh>
@@ -58,8 +57,8 @@ int main(int argc, char** argv)
 
 	
 	// set 3 required initialization classes
-	auto physicsList = new FTFP_BERT;
-  	physicsList->SetVerboseLevel(1);
+	//auto physicsList = new FTFP_BERT;
+	auto physicsList = new QBBC;
  	physicsList->RegisterPhysics(new G4StepLimiterPhysics());
 	runManager->SetUserInitialization(new DetectorConstruction());
 	runManager->SetUserInitialization(physicsList);

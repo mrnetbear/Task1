@@ -67,14 +67,15 @@ namespace TASK1
         G4double worldSize = 20 * cm;
         G4Material* vacuum = nist->FindOrBuildMaterial("G4_Galactic");
         //G4Material* air = nist->FindOrBuildMaterial("G4_AIR");
-        G4double maxStep  = .5*um;
+        G4double maxStep;  //= 10*mm;
         G4double maxTrack = 10.*m;
         G4double maxTime  = 1.*s;
         G4double minE     = 0.001 * MeV;
         G4double minRange = 0.1 * mm;
 
         //,maxTrack,maxTime,minE,minRange
-        fStepLimit = new G4UserLimits(maxStep);
+        //fStepLimit = new G4UserLimits(maxStep);
+        //fStepLimit = new G4UserLimits(maxStep,maxTrack,maxTime,minE,minRange);
 
         auto solidWorld = new G4Box("World",
             worldSize / 2,
@@ -107,8 +108,9 @@ namespace TASK1
         auto logicPlate = new G4LogicalVolume(plate, nist->FindOrBuildMaterial("G4_Au"), "plate");
         new G4PVPlacement(0, posPlate, logicPlate, "plate", logicWorld, false, 0);
 
-        maxStep=10*nm; 
-        fStepLimit = new G4UserLimits(maxStep);
+        maxStep=10*nm;
+        fStepLimit = new G4UserLimits(maxStep); 
+        //fStepLimit = new G4UserLimits(maxStep,maxTrack,maxTime,minE,minRange);
         logicPlate->SetUserLimits(fStepLimit);
 
 
